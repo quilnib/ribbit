@@ -85,7 +85,7 @@
             </objects>
             <point key="canvasLocation" x="1391" y="377"/>
         </scene>
-        <!--Recipients-->
+        <!--Choose Recipients-->
         <scene sceneID="N6j-3I-L81">
             <objects>
                 <tableViewController id="q2a-I3-TpL" customClass="CameraViewController" customModule="Ribbit" customModuleProvider="target" sceneMemberID="viewController">
@@ -106,7 +106,7 @@
                             <outlet property="delegate" destination="q2a-I3-TpL" id="fqh-48-elN"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recipients" id="5cb-xr-xDn"/>
+                    <navigationItem key="navigationItem" title="Choose Recipients" id="5cb-xr-xDn"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3sX-jb-dRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

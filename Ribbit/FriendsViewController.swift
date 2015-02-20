@@ -16,6 +16,23 @@ class FriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
+//        self.friendsRelation!.query().findObjectsInBackgroundWithBlock {// this is how parse.com does the query that is located in viewWillAppear, but not alphabeticalllys
+//            (objects: [AnyObject]!, error: NSError!) -> Void in
+//            if error != nil {
+//                // There was an error
+//            } else {
+//                // objects has all the Posts the current user liked.
+//            }
+//        }
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.friendsRelation = (PFUser.currentUser().objectForKey("friendsRelation") as PFRelation)
         
         if let relation = self.friendsRelation {//wrap in an if-let so we don't get optional-creep
@@ -28,31 +45,15 @@ class FriendsViewController: UITableViewController {
                     
                 } else {
                     //succeeded
-                    self.friends += objects as [PFUser]
+                    self.friends = objects as [PFUser]
                     self.tableView.reloadData()
                     
-                    println("FriendsViewController is calling ViewDidLoad and the friends list has \(self.friends.count) entries")
+                    println("FriendsViewController is calling viewWillAppear and the friends list has \(self.friends.count) entries")
                 }
             })
         }
         
-        
-        
-        
-//        self.friendsRelation!.query().findObjectsInBackgroundWithBlock {// this is how parse.com does it
-//            (objects: [AnyObject]!, error: NSError!) -> Void in
-//            if error != nil {
-//                // There was an error
-//            } else {
-//                // objects has all the Posts the current user liked.
-//            }
-//        }
-        
-    }
     
-    override func viewWillAppear(animated: Bool) {
-        // #warning Potentially incomplete method implementation.
-        //call some code to reload the list of friends
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

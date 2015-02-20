@@ -8,13 +8,47 @@
 
 import UIKit
 
-class CameraViewController: UITableViewController {
+class CameraViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var imagePicker: UIImagePickerController?
+    var image: UIImage?
+    var videoFilePath: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.imagePicker = UIImagePickerController()
+        //        self.imagePicker!.delegate = self
+        //        self.imagePicker!.allowsEditing = false
+        //        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+        //            self.imagePicker!.sourceType = UIImagePickerControllerSourceType.Camera
+        //        } else {
+        //            self.imagePicker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        //        }
+        //        self.imagePicker!.sourceType = UIImagePickerControllerSourceType.Camera
+        //        self.imagePicker!.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(self.imagePicker!.sourceType)!
+        
+        if let camera = imagePicker { //doing it this way handles the optional better
+            camera.delegate = self
+            camera.allowsEditing = false
+            camera.videoMaximumDuration = 10
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+                camera.sourceType = UIImagePickerControllerSourceType.Camera
+            } else {
+                camera.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            }
+            camera.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(camera.sourceType)!
+        }
+        
+        
+        self.presentViewController(self.imagePicker!, animated: false, completion: nil)
+    }
+    
 
     // MARK: - Table view data source
 
@@ -40,40 +74,7 @@ class CameraViewController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
 
     /*
     // MARK: - Navigation
@@ -84,5 +85,37 @@ class CameraViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - Image Picker Controller Delegate
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(false, completion: nil)
+        
+        self.tabBarController?.selectedIndex = 0
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        var mediaType: String = info[UIImagePickerControllerMediaType] as String
+        
+        if (mediaType == kUTTypeImage) {
+            //a photo was taken or selected
+            self.image = (info[UIImagePickerControllerOriginalImage] as UIImage)
+            if (self.imagePicker?.sourceType == UIImagePickerControllerSourceType.Camera) {
+                //save the image
+                UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, nil)
+            }
+        } else {
+            //a video was taken or selected
+            self.videoFilePath = info[UIImagePickerControllerMediaURL]!.path as String!!
+            if (self.imagePicker?.sourceType == UIImagePickerControllerSourceType.Camera) {
+                //save the video
+                if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(self.videoFilePath)) {
+                    UISaveVideoAtPathToSavedPhotosAlbum(self.videoFilePath, nil, nil, nil)
+                }
+            }
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+
+    }
 
 }
