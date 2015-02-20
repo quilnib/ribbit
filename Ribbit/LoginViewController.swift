@@ -26,16 +26,6 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func logIn(sender: AnyObject) {
         
         let username = self.usernameField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())//make sure there isn't any whitespace in the text fields
@@ -55,7 +45,7 @@ class LoginViewController: UIViewController {
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 } else {
                     // The login failed. Check error to see why.
-                    let networkIssueController = UIAlertController(title: "Sorry!", message: error.localizedDescription , preferredStyle: .Alert)
+                    let networkIssueController = UIAlertController(title: "Sorry!", message: "\(error.userInfo!)" , preferredStyle: .Alert)
                     let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     networkIssueController.addAction(okButton)
                     

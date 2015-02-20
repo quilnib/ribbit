@@ -28,6 +28,9 @@
 		837A49811A96899300D806AD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 837A49801A96899300D806AD /* libsqlite3.dylib */; };
 		838272D61A96935600D3C363 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838272D51A96935600D3C363 /* LoginViewController.swift */; };
 		838272D81A96937500D3C363 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838272D71A96937500D3C363 /* SignUpViewController.swift */; };
+		83AA0C3C1A97AC01003035B0 /* EditFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AA0C3B1A97AC01003035B0 /* EditFriendsTableViewController.swift */; };
+		83F870E81A97BC29004942AA /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F870E71A97BC29004942AA /* FriendsViewController.swift */; };
+		83F870EA1A97DAD4004942AA /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F870E91A97DAD4004942AA /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		837A49821A968AEB00D806AD /* Ribbit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ribbit-Bridging-Header.h"; sourceTree = "<group>"; };
 		838272D51A96935600D3C363 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		838272D71A96937500D3C363 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		83AA0C3B1A97AC01003035B0 /* EditFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFriendsTableViewController.swift; sourceTree = "<group>"; };
+		83F870E71A97BC29004942AA /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		83F870E91A97DAD4004942AA /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +141,9 @@
 			isa = PBXGroup;
 			children = (
 				837A49421A96724E00D806AD /* AppDelegate.swift */,
+				83F870E91A97DAD4004942AA /* CameraViewController.swift */,
+				83AA0C3B1A97AC01003035B0 /* EditFriendsTableViewController.swift */,
+				83F870E71A97BC29004942AA /* FriendsViewController.swift */,
 				838272D51A96935600D3C363 /* LoginViewController.swift */,
 				838272D71A96937500D3C363 /* SignUpViewController.swift */,
 				837A49661A96800300D806AD /* InboxViewController.swift */,
@@ -274,7 +283,10 @@
 			files = (
 				838272D61A96935600D3C363 /* LoginViewController.swift in Sources */,
 				837A49431A96724E00D806AD /* AppDelegate.swift in Sources */,
+				83AA0C3C1A97AC01003035B0 /* EditFriendsTableViewController.swift in Sources */,
 				838272D81A96937500D3C363 /* SignUpViewController.swift in Sources */,
+				83F870EA1A97DAD4004942AA /* CameraViewController.swift in Sources */,
+				83F870E81A97BC29004942AA /* FriendsViewController.swift in Sources */,
 				837A49671A96800300D806AD /* InboxViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
