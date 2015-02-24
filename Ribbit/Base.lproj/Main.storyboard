@@ -123,6 +123,39 @@
             </objects>
             <point key="canvasLocation" x="944" y="1053"/>
         </scene>
+        <!--Image View Controller-->
+        <scene sceneID="q7N-SE-XwA">
+            <objects>
+                <viewController id="KHr-Hb-YmL" customClass="ImageViewController" customModule="Ribbit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ybY-aA-soO"/>
+                        <viewControllerLayoutGuide type="bottom" id="DI9-qe-q1k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AoZ-NU-1yu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="guM-we-mXA">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="guM-we-mXA" firstAttribute="leading" secondItem="AoZ-NU-1yu" secondAttribute="leading" id="5H2-kw-ta6"/>
+                            <constraint firstAttribute="bottom" secondItem="guM-we-mXA" secondAttribute="bottom" id="cdq-St-MoY"/>
+                            <constraint firstAttribute="trailing" secondItem="guM-we-mXA" secondAttribute="trailing" id="fwF-r4-cpI"/>
+                            <constraint firstItem="guM-we-mXA" firstAttribute="top" secondItem="ybY-aA-soO" secondAttribute="bottom" id="xIj-kb-fb7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="lJq-mf-f3Y"/>
+                    <connections>
+                        <outlet property="imageView" destination="guM-we-mXA" id="lP2-TY-Rv9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1hx-Gj-QhR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="-1013"/>
+        </scene>
         <!--Ribbit-->
         <scene sceneID="0IX-KS-iqG">
             <objects>
@@ -153,6 +186,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="sk1-Fl-jeH" kind="push" identifier="showLogin" id="sps-eW-OrO"/>
+                        <segue destination="KHr-Hb-YmL" kind="push" identifier="showImage" id="uI7-oV-DGE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLf-s4-Yxi" userLabel="First Responder" sceneMemberID="firstResponder"/>

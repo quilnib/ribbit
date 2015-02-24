@@ -196,7 +196,7 @@ class CameraViewController: UITableViewController, UIImagePickerControllerDelega
         //check if image or video
         if (self.image != nil)
         {   //if image, shrink it
-            var newImage = self.resizeImage(self.image!, toWidth: 320.0, andHeight: 480.0)
+            var newImage = self.resizeImage(self.image!, toWidth: 320.0, andHeight: 431.0)
             fileData = UIImagePNGRepresentation(newImage)
             fileName = "image.png"
             fileType = "image"

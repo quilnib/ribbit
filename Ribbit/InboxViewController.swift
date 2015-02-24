@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class InboxViewController: UITableViewController {
+    
+    var messages: [AnyObject] = []
+    var selectedMessage: PFObject?
+    var moviePlayer: MPMoviePlayerController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +23,12 @@ class InboxViewController: UITableViewController {
 //        testObject["foo"] = "bar"
 //        testObject.saveInBackgroundWithBlock(nil)
         
+        self.moviePlayer = MPMoviePlayerController()
         
         var currentUser = PFUser.currentUser()
         if currentUser != nil {
             // Do stuff with the user
-            println("\(currentUser!.username)")
+            println("Current user: \(currentUser!.username)")
             
 
         } else {
@@ -37,35 +43,96 @@ class InboxViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        var query = PFQuery(className: "Messages")
+        query.whereKey("recipientIds", equalTo: PFUser.currentUser().objectId)
+        query.orderByDescending("createdAt")
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+            if (error != nil) {//something went wrong
+                println("\(error.userInfo!)")
+            } else { //successful query
+                // we foiund messages
+                self.messages = objects
+                self.tableView.reloadData()
+                println("Retreived \(self.messages.count) messages")
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        return self.messages.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 
-        // Configure the cell...
+        let message = self.messages[indexPath.row] as PFObject
+        cell.textLabel?.text = (message.objectForKey("senderName") as String)
+        
+        var fileType = message.objectForKey("fileType") as String
+        if (fileType == "image") {
+            cell.imageView?.image = UIImage(named: "icon_image")
+        } else {
+            cell.imageView?.image = UIImage(named: "icon_video")
+        }
 
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.selectedMessage = (self.messages[indexPath.row] as PFObject)
+        var fileType = self.selectedMessage?.objectForKey("fileType") as String
+        if (fileType == "image") {
+            self.performSegueWithIdentifier("showImage", sender: self)
+        } else {
+            //file type is video
+            let videoFile = self.selectedMessage?.objectForKey("file") as PFFile
+            let fileUrl = NSURL(string: videoFile.url)
+            self.moviePlayer?.contentURL = fileUrl
+            self.moviePlayer?.prepareToPlay()
+            self.moviePlayer!.requestThumbnailImagesAtTimes([0.0], timeOption: MPMovieTimeOption.NearestKeyFrame)
+            
+            //add it to the view controller so we can see it
+            self.view.addSubview(self.moviePlayer!.view)
+            self.moviePlayer!.setFullscreen(true, animated: true)
+        }
+        
+        //delete the message
+        var recipientIds: [String] = self.selectedMessage!.objectForKey("recipientIds") as [String]
+        println("\(recipientIds)")
+        
+        if (recipientIds.count == 1) {
+            //delete
+            self.selectedMessage?.deleteInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in})
+        } else {
+            //remove current recipient from list
+            if let index = find(recipientIds, PFUser.currentUser().objectId) {
+                recipientIds.removeAtIndex(index)
+                self.selectedMessage?.setObject(recipientIds, forKey: "recipientIds")
+                self.selectedMessage?.saveInBackgroundWithBlock(nil)
+            }
+        }
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -114,6 +181,11 @@ class InboxViewController: UITableViewController {
             let bottomBar = segue.destinationViewController as LoginViewController
             bottomBar.hidesBottomBarWhenPushed = true
             bottomBar.navigationItem.hidesBackButton = true
+        } else if (segue.identifier == "showImage") {
+            let imageView = segue.destinationViewController as ImageViewController
+            imageView.hidesBottomBarWhenPushed = true
+            imageView.message = self.selectedMessage
+            
         }
     }
     
