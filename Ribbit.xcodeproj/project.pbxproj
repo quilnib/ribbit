@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		832E81DF1A9BFBDC004AD592 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832E81DE1A9BFBDC004AD592 /* ImageViewController.swift */; };
 		837A49431A96724E00D806AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837A49421A96724E00D806AD /* AppDelegate.swift */; };
 		837A494A1A96724E00D806AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837A49481A96724E00D806AD /* Main.storyboard */; };
 		837A494C1A96724E00D806AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 837A494B1A96724E00D806AD /* Images.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		832E81DE1A9BFBDC004AD592 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		837A493D1A96724E00D806AD /* Ribbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ribbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837A49411A96724E00D806AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		837A49421A96724E00D806AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				837A49421A96724E00D806AD /* AppDelegate.swift */,
+				832E81DE1A9BFBDC004AD592 /* ImageViewController.swift */,
 				83F870E91A97DAD4004942AA /* CameraViewController.swift */,
 				83AA0C3B1A97AC01003035B0 /* EditFriendsTableViewController.swift */,
 				83F870E71A97BC29004942AA /* FriendsViewController.swift */,
@@ -287,6 +290,7 @@
 				838272D81A96937500D3C363 /* SignUpViewController.swift in Sources */,
 				83F870EA1A97DAD4004942AA /* CameraViewController.swift in Sources */,
 				83F870E81A97BC29004942AA /* FriendsViewController.swift in Sources */,
+				832E81DF1A9BFBDC004AD592 /* ImageViewController.swift in Sources */,
 				837A49671A96800300D806AD /* InboxViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
