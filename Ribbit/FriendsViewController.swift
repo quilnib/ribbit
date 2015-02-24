@@ -16,7 +16,7 @@ class FriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.friendsRelation = (PFUser.currentUser().objectForKey("friendsRelation") as PFRelation)
         
         
 //        self.friendsRelation!.query().findObjectsInBackgroundWithBlock {// this is how parse.com does the query that is located in viewWillAppear, but not alphabeticalllys
@@ -32,8 +32,6 @@ class FriendsViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.friendsRelation = (PFUser.currentUser().objectForKey("friendsRelation") as PFRelation)
         
         if let relation = self.friendsRelation {//wrap in an if-let so we don't get optional-creep
             var query = relation.query()
